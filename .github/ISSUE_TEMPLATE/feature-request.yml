@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest an improvement to the governed operations-intelligence workflow.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What user or operator need is not served well today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the behavior you want to see.
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow impact
+      description: Which parts of the system would this affect? Think AI, governance, alerts, ingestion, reports, or security.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
