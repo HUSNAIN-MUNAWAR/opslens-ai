@@ -1,0 +1,163 @@
+{
+  "alerts": {
+    "created": 12,
+    "refreshed": 2,
+    "triggered_count": 14
+  },
+  "approval": {
+    "final_status": "approved",
+    "first_step": "in_review",
+    "policy": [
+      "Operations Manager",
+      "Organization Admin"
+    ],
+    "requested_status": "pending",
+    "simulated_execution": true
+  },
+  "events": [
+    {
+      "detail": "The real FastAPI lifespan seeds synthetic organizations, products, sales, inventory, suppliers, quality issues, and governance policies.",
+      "id": "workspace",
+      "metric": "5 KPIs \u00b7 4 open alerts",
+      "short": "Seed",
+      "status": "ready",
+      "title": "Synthetic workspace is loaded"
+    },
+    {
+      "detail": "The governed route selects stockout metrics, approved tables, tenant scope, dimensions, and a bounded row limit.",
+      "id": "plan",
+      "metric": "stockout_risk \u00b7 24 row limit",
+      "short": "Plan",
+      "status": "completed",
+      "title": "The question becomes a certified plan"
+    },
+    {
+      "detail": "Read-only SQL is validated before execution, with organization scope, allowlists, complexity, and row limits recorded.",
+      "id": "guard",
+      "metric": "valid True \u00b7 parser sqlglot",
+      "short": "Guard",
+      "status": "validated",
+      "title": "SQL passes AST and tenant checks"
+    },
+    {
+      "detail": "The response carries synthetic rows, source tables, confidence, and active data-quality notices into the answer boundary.",
+      "id": "evidence",
+      "metric": "18 rows \u00b7 confidence 0.78",
+      "short": "Evidence",
+      "status": "grounded",
+      "title": "Evidence and quality warnings are packaged"
+    },
+    {
+      "detail": "A transparent baseline and inventory-transfer scenario estimate impact without mutating ERP, inventory, supplier, or pricing records.",
+      "id": "simulate",
+      "metric": "exponential_smoothing_baseline \u00b7 16 projected risk",
+      "short": "Simulate",
+      "status": "simulated",
+      "title": "Forecast and scenario effects stay simulated"
+    },
+    {
+      "detail": "The operations manager completes step one and the organization admin completes step two; only the simulated recommendation changes state.",
+      "id": "approve",
+      "metric": "in_review \u2192 approved \u00b7 2 steps",
+      "short": "Approve",
+      "status": "approved",
+      "title": "Human approval completes the workflow"
+    }
+  ],
+  "fixture": "opslens-governed-decision-loop",
+  "forecast": {
+    "first_value": 1156515.24,
+    "horizon_days": 14,
+    "last_value": 1231314.73,
+    "method": "exponential_smoothing_baseline",
+    "quality_notice_count": 3
+  },
+  "model": {
+    "claim_boundary": "Synthetic decision-support evidence; no external LLM, live integration, ERP mutation, or business-impact claim.",
+    "execution_mode": "deterministic_governed_template",
+    "forecast": "exponential_smoothing_baseline",
+    "query_planner": "apps/api/app/services.py::question_plan",
+    "sql_guard": "apps/api/app/sql_guard.py::validate_sql"
+  },
+  "quality": {
+    "active_issue_count": 5,
+    "critical_source_count": 2,
+    "overall_score": 59
+  },
+  "question_trace": {
+    "answer": "18 branch-SKU combinations are below their reorder policy. The most urgent exposure is concentrated in Islamabad and Lahore; validate open supplier POs before submitting a replenishment action for approval.",
+    "confidence": 0.78,
+    "evidence_row_count": 18,
+    "quality_warning_count": 3,
+    "query_plan": {
+      "aggregation": "ranked detail",
+      "allowed_tables": [
+        "inventory_records",
+        "products",
+        "branches",
+        "suppliers"
+      ],
+      "confidence": 0.91,
+      "date_range": {
+        "relative": "last_30_days"
+      },
+      "dimensions": [
+        "sku",
+        "branch",
+        "supplier"
+      ],
+      "explanation_strategy": "grounded_evidence_summary",
+      "filters": {
+        "organization_id": 1
+      },
+      "intent": "stockout_risk",
+      "metrics": [
+        "Stock cover days",
+        "Stockout risk"
+      ],
+      "ranking": "available_units ascending",
+      "requires_followup": false,
+      "row_limit": 24
+    },
+    "status": "completed",
+    "synthetic": true,
+    "validation": {
+      "complexity_score": 4,
+      "parser": "sqlglot",
+      "reasons": [
+        "AST validation passed: read-only statement, approved relations, bounded result set."
+      ],
+      "row_limit": 24,
+      "tables": [
+        "branches",
+        "inventory_records",
+        "products"
+      ],
+      "valid": true
+    }
+  },
+  "scenario": {
+    "assurance": "Simulation only \u2014 no operational inventory, supplier, pricing, or ERP record is mutated.",
+    "baseline": {
+      "gross_margin": 28.96,
+      "inventory_value": 1485674073.65,
+      "revenue": 40164970.78,
+      "stockout_risk": 18.0
+    },
+    "projected": {
+      "gross_margin": 28.96,
+      "inventory_value": 1485674073.65,
+      "revenue": 40164970.78,
+      "stockout_risk": 16,
+      "supplier_exposure": 0.0
+    },
+    "simulated": true
+  },
+  "schema_version": "1.0",
+  "source": {
+    "path": "demo/animation_fixture.synthetic.json",
+    "runtime": "FastAPI TestClient + temporary SQLite database",
+    "sha256": "d6cb1af131d71e3204a288f48029349172b22c70210f5168707cc8292f468a9e",
+    "synthetic": true
+  }
+}

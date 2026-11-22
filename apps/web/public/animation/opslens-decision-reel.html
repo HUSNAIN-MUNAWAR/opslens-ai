@@ -1,0 +1,167 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>OpsLens — Governed decision reference reel</title><style>
+:root{color-scheme:dark;--ink:#f0f5f3;--muted:#9db3ae;--line:#294b48;--accent:#b8ef72}*{box-sizing:border-box}body{margin:0;min-width:320px;background:radial-gradient(circle at 84% 0,#304820 0,#101b13 48%,#070b09 100%);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,sans-serif}main{max-width:1180px;margin:auto;padding:42px 28px 34px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}h1{max-width:850px;margin:8px 0 10px;font-size:clamp(28px,5vw,54px);line-height:1.02;letter-spacing:-.045em}.lede{max-width:800px;margin:0;color:var(--muted);font-size:17px}.stage{margin-top:34px;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(36,66,36,.94),rgba(8,15,10,.98));box-shadow:0 22px 60px rgba(0,0,0,.3)}svg{display:block;width:100%;height:auto;min-height:300px}.route{fill:none;stroke:#526b4b;stroke-width:4;stroke-linecap:round;stroke-dasharray:7 12}.station circle{fill:#0a1610;stroke:#69805a;stroke-width:3;transition:fill .25s,stroke .25s,transform .25s;transform-origin:center}.station text{fill:#adc0a8;font-size:14px;text-anchor:middle}.station .index{fill:#e4f4d9;font-size:13px;font-weight:800}.station.active circle{fill:#42621e;stroke:var(--accent);transform:scale(1.1)}.station.active text{fill:var(--ink)}.station.done circle{fill:#2d4827;stroke:#9abf70}.token{fill:var(--accent);stroke:#f1ffd9;stroke-width:3;filter:drop-shadow(0 0 12px rgba(184,239,114,.65))}.token-label{fill:#1b2b0b;font-size:10px;font-weight:900;text-anchor:middle}.panel{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:end;padding:22px 24px 24px;border-top:1px solid var(--line)}.panel h2{margin:0 0 3px;font-size:24px;letter-spacing:-.02em}.panel p{margin:0;color:var(--muted)}.metric{color:var(--accent);font-size:13px;font-weight:800;text-align:right}.controls{display:flex;gap:8px;margin-top:16px}button{border:1px solid #718f5f;border-radius:999px;padding:9px 15px;background:#29451f;color:var(--ink);font:inherit;cursor:pointer}button:hover,button:focus-visible{border-color:var(--accent);outline:2px solid rgba(184,239,114,.35);outline-offset:2px}.timeline{display:grid;grid-template-columns:repeat(3,minmax(120px,1fr));gap:7px;margin-top:18px}.timeline button{min-height:60px;border-radius:12px;padding:8px;color:var(--muted);text-align:left;font-size:12px}.timeline button[aria-current=step]{border-color:var(--accent);background:#3a5b24;color:var(--ink)}.timeline strong{display:block;color:inherit;font-size:11px;text-transform:uppercase;letter-spacing:.08em}.disclaimer{margin-top:20px;color:var(--muted);font-size:12px}@media(max-width:760px){main{padding:28px 16px}.panel{grid-template-columns:1fr}.metric{text-align:left}.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}svg{min-height:420px}}@media(prefers-reduced-motion:reduce){*,*::before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style></head><body><main><div class="eyebrow">OpsLens AI · production reference reel</div><h1>Evidence enters a governed decision loop.</h1><p class="lede">Synthetic operations data becomes a bounded query, validated evidence, transparent simulation, and a two-step human approval — without mutating a live system.</p><section class="stage" aria-label="Animated governed decision sequence"><svg viewBox="0 0 1210 390" role="img" aria-labelledby="diagram-title diagram-description"><title id="diagram-title">OpsLens governed decision stages</title><desc id="diagram-description">A token travels through seeded workspace, query planning, SQL guard, evidence, simulation, and approval.</desc><path class="route" d="M80 190 C220 82 360 82 510 190 S800 298 1130 100"></path><g id="stations"></g><g aria-hidden="true"><circle id="token" class="token" cx="80" cy="190" r="22"></circle><text id="token-label" class="token-label" x="80" y="194">RUN</text></g></svg><div class="panel" aria-live="polite"><div><h2 id="event-title"></h2><p id="event-detail"></p></div><div id="event-metric" class="metric"></div></div></section><div class="controls"><button id="toggle" type="button">Pause</button><button id="replay" type="button">Replay</button></div><div id="timeline" class="timeline" role="list" aria-label="Animation stages"></div><p class="disclaimer">Synthetic workspace · deterministic governance services · simulation only · no live ERP write.</p><script>
+const sequence={
+  "alerts": {
+    "created": 12,
+    "refreshed": 2,
+    "triggered_count": 14
+  },
+  "approval": {
+    "final_status": "approved",
+    "first_step": "in_review",
+    "policy": [
+      "Operations Manager",
+      "Organization Admin"
+    ],
+    "requested_status": "pending",
+    "simulated_execution": true
+  },
+  "events": [
+    {
+      "detail": "The real FastAPI lifespan seeds synthetic organizations, products, sales, inventory, suppliers, quality issues, and governance policies.",
+      "id": "workspace",
+      "metric": "5 KPIs \u00b7 4 open alerts",
+      "short": "Seed",
+      "status": "ready",
+      "title": "Synthetic workspace is loaded"
+    },
+    {
+      "detail": "The governed route selects stockout metrics, approved tables, tenant scope, dimensions, and a bounded row limit.",
+      "id": "plan",
+      "metric": "stockout_risk \u00b7 24 row limit",
+      "short": "Plan",
+      "status": "completed",
+      "title": "The question becomes a certified plan"
+    },
+    {
+      "detail": "Read-only SQL is validated before execution, with organization scope, allowlists, complexity, and row limits recorded.",
+      "id": "guard",
+      "metric": "valid True \u00b7 parser sqlglot",
+      "short": "Guard",
+      "status": "validated",
+      "title": "SQL passes AST and tenant checks"
+    },
+    {
+      "detail": "The response carries synthetic rows, source tables, confidence, and active data-quality notices into the answer boundary.",
+      "id": "evidence",
+      "metric": "18 rows \u00b7 confidence 0.78",
+      "short": "Evidence",
+      "status": "grounded",
+      "title": "Evidence and quality warnings are packaged"
+    },
+    {
+      "detail": "A transparent baseline and inventory-transfer scenario estimate impact without mutating ERP, inventory, supplier, or pricing records.",
+      "id": "simulate",
+      "metric": "exponential_smoothing_baseline \u00b7 16 projected risk",
+      "short": "Simulate",
+      "status": "simulated",
+      "title": "Forecast and scenario effects stay simulated"
+    },
+    {
+      "detail": "The operations manager completes step one and the organization admin completes step two; only the simulated recommendation changes state.",
+      "id": "approve",
+      "metric": "in_review \u2192 approved \u00b7 2 steps",
+      "short": "Approve",
+      "status": "approved",
+      "title": "Human approval completes the workflow"
+    }
+  ],
+  "fixture": "opslens-governed-decision-loop",
+  "forecast": {
+    "first_value": 1156515.24,
+    "horizon_days": 14,
+    "last_value": 1231314.73,
+    "method": "exponential_smoothing_baseline",
+    "quality_notice_count": 3
+  },
+  "model": {
+    "claim_boundary": "Synthetic decision-support evidence; no external LLM, live integration, ERP mutation, or business-impact claim.",
+    "execution_mode": "deterministic_governed_template",
+    "forecast": "exponential_smoothing_baseline",
+    "query_planner": "apps/api/app/services.py::question_plan",
+    "sql_guard": "apps/api/app/sql_guard.py::validate_sql"
+  },
+  "quality": {
+    "active_issue_count": 5,
+    "critical_source_count": 2,
+    "overall_score": 59
+  },
+  "question_trace": {
+    "answer": "18 branch-SKU combinations are below their reorder policy. The most urgent exposure is concentrated in Islamabad and Lahore; validate open supplier POs before submitting a replenishment action for approval.",
+    "confidence": 0.78,
+    "evidence_row_count": 18,
+    "quality_warning_count": 3,
+    "query_plan": {
+      "aggregation": "ranked detail",
+      "allowed_tables": [
+        "inventory_records",
+        "products",
+        "branches",
+        "suppliers"
+      ],
+      "confidence": 0.91,
+      "date_range": {
+        "relative": "last_30_days"
+      },
+      "dimensions": [
+        "sku",
+        "branch",
+        "supplier"
+      ],
+      "explanation_strategy": "grounded_evidence_summary",
+      "filters": {
+        "organization_id": 1
+      },
+      "intent": "stockout_risk",
+      "metrics": [
+        "Stock cover days",
+        "Stockout risk"
+      ],
+      "ranking": "available_units ascending",
+      "requires_followup": false,
+      "row_limit": 24
+    },
+    "status": "completed",
+    "synthetic": true,
+    "validation": {
+      "complexity_score": 4,
+      "parser": "sqlglot",
+      "reasons": [
+        "AST validation passed: read-only statement, approved relations, bounded result set."
+      ],
+      "row_limit": 24,
+      "tables": [
+        "branches",
+        "inventory_records",
+        "products"
+      ],
+      "valid": true
+    }
+  },
+  "scenario": {
+    "assurance": "Simulation only \u2014 no operational inventory, supplier, pricing, or ERP record is mutated.",
+    "baseline": {
+      "gross_margin": 28.96,
+      "inventory_value": 1485674073.65,
+      "revenue": 40164970.78,
+      "stockout_risk": 18.0
+    },
+    "projected": {
+      "gross_margin": 28.96,
+      "inventory_value": 1485674073.65,
+      "revenue": 40164970.78,
+      "stockout_risk": 16,
+      "supplier_exposure": 0.0
+    },
+    "simulated": true
+  },
+  "schema_version": "1.0",
+  "source": {
+    "path": "demo/animation_fixture.synthetic.json",
+    "runtime": "FastAPI TestClient + temporary SQLite database",
+    "sha256": "d6cb1af131d71e3204a288f48029349172b22c70210f5168707cc8292f468a9e",
+    "synthetic": true
+  }
+};const events=sequence.events;const points=[[80,190],[270,96],[460,96],[650,190],[840,284],[1040,284]];const stations=document.getElementById('stations'),timeline=document.getElementById('timeline'),token=document.getElementById('token'),tokenLabel=document.getElementById('token-label'),title=document.getElementById('event-title'),detail=document.getElementById('event-detail'),metric=document.getElementById('event-metric'),toggle=document.getElementById('toggle');let current=0,started=performance.now(),playing=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;const duration=1900;points.forEach((point,index)=>{const group=document.createElementNS('http://www.w3.org/2000/svg','g');group.classList.add('station');group.innerHTML=`<circle cx="${point[0]}" cy="${point[1]}" r="30"></circle><text class="index" x="${point[0]}" y="${point[1]+5}">${index+1}</text><text x="${point[0]}" y="${point[1]+57}">${events[index].short}</text>`;stations.appendChild(group)});events.forEach((event,index)=>{const item=document.createElement('button');item.type='button';item.setAttribute('role','listitem');item.innerHTML=`<strong>${String(index+1).padStart(2,'0')} · ${event.status}</strong>${event.title}`;item.addEventListener('click',()=>{current=index;started=performance.now();playing=false;toggle.textContent='Play';render(0)});timeline.appendChild(item)});function render(progress){const next=(current+1)%points.length,from=points[current],to=points[next],x=from[0]+(to[0]-from[0])*progress,y=from[1]+(to[1]-from[1])*progress;token.setAttribute('cx',x);token.setAttribute('cy',y);tokenLabel.setAttribute('x',x);tokenLabel.setAttribute('y',y+4);title.textContent=events[current].title;detail.textContent=events[current].detail;metric.textContent=events[current].metric;document.querySelectorAll('.station').forEach((node,index)=>{node.classList.toggle('active',index===current);node.classList.toggle('done',index<current)});timeline.querySelectorAll('button').forEach((node,index)=>node.setAttribute('aria-current',index===current?'step':'false'))}function animate(now){if(playing){const progress=Math.min(1,(now-started)/duration);render(progress);if(progress>=1){current=(current+1)%events.length;started=now}}else{render(0)}requestAnimationFrame(animate)}toggle.addEventListener('click',()=>{playing=!playing;started=performance.now();toggle.textContent=playing?'Pause':'Play'});document.getElementById('replay').addEventListener('click',()=>{current=0;started=performance.now();playing=true;toggle.textContent='Pause'});render(0);requestAnimationFrame(animate);
+</script></main></body></html>

@@ -1,0 +1,11 @@
+{
+  "fixture_id": "opslens-governed-decision-loop",
+  "synthetic": true,
+  "workspace": "northstar",
+  "question": "Which products are likely to stock out within 14 days?",
+  "scenario": {
+    "name": "Synthetic transfer decision",
+    "adjustments": [{"type": "transfer_inventory", "value": 40}]
+  },
+  "forecast": {"metric": "revenue", "horizon_days": 14}
+}

@@ -67,6 +67,17 @@ All accounts use password `DemoPass123!`.
 
 The demo works without external LLM keys, ERP credentials, ecommerce credentials, Slack/email credentials, S3 credentials, webhooks, or supplier APIs. Deterministic local services power Copilot answers, SQL plans, forecast baselines, anomaly records, alert evaluation, scenario impact estimates, report records, and import validation.
 
+## Governed decision animation reference
+
+Regenerate the deterministic synthetic-data reel by running the real FastAPI workflow against a temporary SQLite workspace:
+
+```bash
+python scripts/generate_opslens_animation.py
+# or: make animation
+```
+
+The output is `docs/animation/opslens_decision_sequence.json` plus the dependency-free `apps/web/public/animation/opslens-decision-reel.html`. It records query planning, SQL governance, evidence, simulation, and two-step approval without calling a live integration or mutating an operational system.
+
 ## Technology stack
 
 | Layer | Technology |
