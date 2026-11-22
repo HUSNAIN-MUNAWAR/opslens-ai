@@ -157,7 +157,7 @@
   "source": {
     "path": "demo/animation_fixture.synthetic.json",
     "runtime": "FastAPI TestClient + temporary SQLite database",
-    "sha256": "d6cb1af131d71e3204a288f48029349172b22c70210f5168707cc8292f468a9e",
+    "sha256": "4e44c7a8a7d208578b14b1ceefeb7568d43157428d1446e3911b434d3f65f6ff",
     "synthetic": true
   }
 }

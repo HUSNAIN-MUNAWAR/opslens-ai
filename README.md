@@ -67,6 +67,16 @@ All accounts use password `DemoPass123!`.
 
 The demo works without external LLM keys, ERP credentials, ecommerce credentials, Slack/email credentials, S3 credentials, webhooks, or supplier APIs. Deterministic local services power Copilot answers, SQL plans, forecast baselines, anomaly records, alert evaluation, scenario impact estimates, report records, and import validation.
 
+## Real local governed-runtime evidence
+
+The accepted animation executes the real FastAPI workflow and stores the actual query plan, SQL validation, evidence rows, forecast, simulated scenario, and approval state:
+
+```powershell
+py -3.12 scripts/generate_real_runtime_video.py
+```
+
+Review [`docs/animation/REAL_RUNTIME.md`](docs/animation/REAL_RUNTIME.md) and [`docs/animation/runtime-evidence/`](docs/animation/runtime-evidence/). This repository currently has no learned model or external LLM path; that limitation is shown in the report and animation.
+
 ## Governed decision animation reference
 
 Regenerate the deterministic synthetic-data reel by running the real FastAPI workflow against a temporary SQLite workspace:
@@ -76,7 +86,7 @@ python scripts/generate_opslens_animation.py
 # or: make animation
 ```
 
-The output is `docs/animation/opslens_decision_sequence.json` plus the dependency-free `apps/web/public/animation/opslens-decision-reel.html`. It records query planning, SQL governance, evidence, simulation, and two-step approval without calling a live integration or mutating an operational system.
+The output is `docs/animation/opslens_decision_sequence.json` plus the dependency-free `apps/web/public/animation/opslens-decision-reel.html`. It remains the reference UI contract; use the real-runtime command above for preserved execution evidence.
 
 ## Technology stack
 

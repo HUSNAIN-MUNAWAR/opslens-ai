@@ -1,4 +1,4 @@
-.PHONY: up down api web seed animation migrate test lint typecheck screenshots
+.PHONY: up down api web seed animation real-runtime migrate test lint typecheck screenshots
 up:
 	docker compose up --build
 
@@ -19,6 +19,9 @@ seed:
 
 animation:
 	python scripts/generate_opslens_animation.py
+
+real-runtime:
+	python scripts/generate_real_runtime_video.py
 
 test:
 	cd apps/api && pytest -q

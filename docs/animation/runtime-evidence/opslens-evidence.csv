@@ -1,0 +1,19 @@
+available,branch,days_cover,product,recommended_order,reorder_point,risk,sku,supplier,unit_cost
+0,Islamabad Branch,1,Baby Care Essential 111,108,36,critical,NSR-1110,NorthStar Imports,5327.84
+0,Lahore Branch,1,Audio Core 265,141,47,critical,NSR-1264,Crescent Trading,2076.95
+2,Islamabad Branch,1,Health Core 37,34,12,critical,NSR-1036,Orbit Wholesale,6912.96
+3,Islamabad Branch,1,Office Supplies Plus 74,72,25,critical,NSR-1073,Meridian Supply,3360.51
+3,Islamabad Branch,1,Audio Core 185,102,35,critical,NSR-1184,Crescent Trading,2347.7
+4,Lahore Branch,1.1,Kitchenware Plus 106,38,14,high,NSR-1105,Prime Route,5116.74
+4,Lahore Branch,1,Stationery Essential 159,47,17,high,NSR-1158,Harbor Goods,3578.26
+6,Lahore Branch,1,Fashion Plus 318,93,33,critical,NSR-1317,Lumen Partners,744.02
+7,Islamabad Branch,1,Stationery Essential 259,137,48,critical,NSR-1258,Harbor Goods,7524.92
+7,Islamabad Branch,1.3,Automotive Pro 296,59,22,high,NSR-1295,Prime Route,4823.12
+8,Lahore Branch,1,Home Decor Core 53,121,43,critical,NSR-1052,Atlas Consumer,6041.74
+8,Islamabad Branch,1,Beverages Pro 148,91,33,high,NSR-1147,Lumen Partners,4377.81
+8,Lahore Branch,1,Pet Supplies Pro 212,130,46,critical,NSR-1211,Vertex Distribution,2563.78
+10,Islamabad Branch,1,Home Appliances Plus 222,122,44,high,NSR-1221,Vertex Distribution,3769.77
+16,Faisalabad Branch,4.0,Cleaning Plus 310,32,16,high,NSR-1309,BluePeak Logistics,2491.8
+18,Rawalpindi Branch,4.0,Home Appliances Plus 22,36,18,high,NSR-1021,Vertex Distribution,8233.07
+22,Faisalabad Branch,4.0,Automotive Pro 296,44,22,high,NSR-1295,Prime Route,4823.12
+27,Lahore Branch,4.0,Baby Care Essential 271,54,27,high,NSR-1270,NorthStar Imports,8849.65

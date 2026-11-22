@@ -7,7 +7,7 @@ import json
 import time
 import uuid
 from contextlib import asynccontextmanager
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -764,7 +764,7 @@ def api_keys(org: Organization = Depends(active_organization), db: Session = Dep
 @app.post("/api/v1/security/api-keys", tags=["Security"])
 def create_api_key(payload: ApiKeyCreate, request: Request, user: User = Depends(current_user), org: Organization = Depends(active_organization), db: Session = Depends(get_db)) -> dict[str, Any]:
     _require_workspace_role(user, db, {"Organization Admin"})
-    key = ApiKey(organization_id=org.id, user_id=user.id, label=payload.label, prefix="ops_live_", scopes=payload.scopes, expires_at=NOW+timedelta(days=payload.expires_in_days))
+    key = ApiKey(organization_id=org.id, user_id=user.id, label=payload.label, prefix="ops_live_", scopes=payload.scopes, expires_at=datetime.now(timezone.utc).replace(tzinfo=None)+timedelta(days=payload.expires_in_days))
     db.add(key)
     db.flush()
     _audit(db, org.id, user, "api_key.create", "api_key", str(key.id), {"scopes": payload.scopes}, request.headers.get("X-Request-ID", ""))

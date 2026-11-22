@@ -1,0 +1,833 @@
+{
+  "alerts": {
+    "created": 12,
+    "refreshed": 2,
+    "triggered_count": 14
+  },
+  "approval": {
+    "final_status": "approved",
+    "first_step": "in_review",
+    "policy": [
+      "Operations Manager",
+      "Organization Admin"
+    ],
+    "requested_status": "pending",
+    "simulated_execution": true
+  },
+  "artifacts": {
+    "approval_csv": {
+      "path": "docs/animation/runtime-evidence/opslens-approval.csv",
+      "sha256": "d855018f1194e690edaf2d98049f185d90099a7b1b96bdfc133e6a713832eaa0"
+    },
+    "evidence_csv": {
+      "path": "docs/animation/runtime-evidence/opslens-evidence.csv",
+      "sha256": "ca89357cc1819e87d9068938046e6485f591b8cf3bb7116c0e98290e6374c7c6"
+    },
+    "forecast_csv": {
+      "path": "docs/animation/runtime-evidence/opslens-forecast.csv",
+      "sha256": "755a78dcb3c7e44cfda7131eba663427c9ee7972926e0fd1e3fdf0eabf282c80"
+    },
+    "poster": {
+      "path": "docs/animation/runtime-evidence/opslens-runtime-poster.png",
+      "sha256": "184d29d309667c17e09481c1f6b355c955cba9a9c84c29fff1f441ca1af76aa4"
+    },
+    "video": {
+      "fps": 20,
+      "frames": 256,
+      "path": "docs/animation/runtime-evidence/opslens-runtime.mp4",
+      "sha256": "2b0fbfd28d775b3bf16e5fa04f0dbff1e379c241671d4fa9aa3e240f73a0c434"
+    }
+  },
+  "claim_boundary": "Synthetic decision-support evidence; deterministic governed rules and a transparent baseline forecast; no learned model, external LLM, live integration, ERP mutation, or business-impact claim.",
+  "fixture": {
+    "fixture_id": "opslens-governed-decision-loop",
+    "forecast": {
+      "horizon_days": 14,
+      "metric": "revenue"
+    },
+    "question": "Which products are likely to stock out within 14 days?",
+    "scenario": {
+      "adjustments": [
+        {
+          "type": "transfer_inventory",
+          "value": 40
+        }
+      ],
+      "name": "Synthetic transfer decision"
+    },
+    "synthetic": true,
+    "workspace": "northstar"
+  },
+  "forecast": {
+    "assumptions": [
+      "Historical sales pattern is stable",
+      "No unmodeled promotions",
+      "Supplier lead time remains within current baseline"
+    ],
+    "explanation": "The projection uses a transparent exponentially weighted baseline. It is a decision-support estimate, not a production accuracy claim.",
+    "forecast": [
+      {
+        "day": 1,
+        "lower": 892206.26,
+        "upper": 1420824.22,
+        "value": 1156515.24
+      },
+      {
+        "day": 2,
+        "lower": 897960.06,
+        "upper": 1426578.02,
+        "value": 1162269.04
+      },
+      {
+        "day": 3,
+        "lower": 903713.87,
+        "upper": 1432331.83,
+        "value": 1168022.85
+      },
+      {
+        "day": 4,
+        "lower": 909467.68,
+        "upper": 1438085.64,
+        "value": 1173776.66
+      },
+      {
+        "day": 5,
+        "lower": 915221.49,
+        "upper": 1443839.45,
+        "value": 1179530.47
+      },
+      {
+        "day": 6,
+        "lower": 920975.29,
+        "upper": 1449593.25,
+        "value": 1185284.27
+      },
+      {
+        "day": 7,
+        "lower": 926729.1,
+        "upper": 1455347.06,
+        "value": 1191038.08
+      },
+      {
+        "day": 8,
+        "lower": 932482.91,
+        "upper": 1461100.87,
+        "value": 1196791.89
+      },
+      {
+        "day": 9,
+        "lower": 938236.71,
+        "upper": 1466854.67,
+        "value": 1202545.69
+      },
+      {
+        "day": 10,
+        "lower": 943990.52,
+        "upper": 1472608.48,
+        "value": 1208299.5
+      },
+      {
+        "day": 11,
+        "lower": 949744.33,
+        "upper": 1478362.29,
+        "value": 1214053.31
+      },
+      {
+        "day": 12,
+        "lower": 955498.14,
+        "upper": 1484116.1,
+        "value": 1219807.12
+      },
+      {
+        "day": 13,
+        "lower": 961251.94,
+        "upper": 1489869.9,
+        "value": 1225560.92
+      },
+      {
+        "day": 14,
+        "lower": 967005.75,
+        "upper": 1495623.71,
+        "value": 1231314.73
+      }
+    ],
+    "history": [
+      {
+        "index": 1,
+        "value": 1134383.39
+      },
+      {
+        "index": 2,
+        "value": 1162970.49
+      },
+      {
+        "index": 3,
+        "value": 1858836.84
+      },
+      {
+        "index": 4,
+        "value": 1412711.83
+      },
+      {
+        "index": 5,
+        "value": 1203432.14
+      },
+      {
+        "index": 6,
+        "value": 1262328.21
+      },
+      {
+        "index": 7,
+        "value": 1492674.23
+      },
+      {
+        "index": 8,
+        "value": 1085053.28
+      },
+      {
+        "index": 9,
+        "value": 1792187.17
+      },
+      {
+        "index": 10,
+        "value": 1041040.85
+      },
+      {
+        "index": 11,
+        "value": 1256394.5
+      },
+      {
+        "index": 12,
+        "value": 1379217.6
+      },
+      {
+        "index": 13,
+        "value": 1370423.81
+      },
+      {
+        "index": 14,
+        "value": 1175980.65
+      },
+      {
+        "index": 15,
+        "value": 1739441.36
+      },
+      {
+        "index": 16,
+        "value": 1259190.21
+      },
+      {
+        "index": 17,
+        "value": 1563112.31
+      },
+      {
+        "index": 18,
+        "value": 991300.37
+      },
+      {
+        "index": 19,
+        "value": 1375116.49
+      },
+      {
+        "index": 20,
+        "value": 1346338.68
+      },
+      {
+        "index": 21,
+        "value": 823644.38
+      }
+    ],
+    "horizon_days": 14,
+    "label": "Baseline forecast \u2014 synthetic workspace",
+    "method": "exponential_smoothing_baseline",
+    "metric_slug": "revenue",
+    "quality_notices": [
+      {
+        "affected_table": "inventory_records",
+        "message": "Inventory snapshot delayed by 14 hours: Refresh the inventory snapshot before approving replenishment action.",
+        "quality_issue_id": 1,
+        "severity": "high"
+      },
+      {
+        "affected_table": "sales_transactions",
+        "message": "Duplicate transaction import detected: Deduplicate source transaction IDs before publishing financial metrics.",
+        "quality_issue_id": 3,
+        "severity": "warning"
+      },
+      {
+        "affected_table": "sales_transactions",
+        "message": "Negative unit price in supplier file: Quarantine the record and confirm the supplier import transformation.",
+        "quality_issue_id": 4,
+        "severity": "critical"
+      }
+    ]
+  },
+  "quality": {
+    "accuracy_proxy_score": 88,
+    "active_issue_count": 5,
+    "completeness_score": 89,
+    "consistency_score": 90,
+    "critical_source_count": 2,
+    "freshness_score": 80,
+    "issues": [
+      {
+        "affected_records": 320,
+        "affected_table": "inventory_records",
+        "id": 1,
+        "issue_type": "Inventory snapshot delayed by 14 hours",
+        "related_metrics": [
+          "stock_cover",
+          "stockout_risk"
+        ],
+        "remediation": "Refresh the inventory snapshot before approving replenishment action.",
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "affected_records": 16,
+        "affected_table": "products",
+        "id": 2,
+        "issue_type": "Supplier mapping missing for 16 products",
+        "related_metrics": [
+          "supplier_lead_time",
+          "stockout_risk"
+        ],
+        "remediation": "Map supplier references, re-run validation, and review affected stockout recommendations.",
+        "severity": "critical",
+        "status": "open"
+      },
+      {
+        "affected_records": 7,
+        "affected_table": "sales_transactions",
+        "id": 3,
+        "issue_type": "Duplicate transaction import detected",
+        "related_metrics": [
+          "revenue",
+          "gross_margin"
+        ],
+        "remediation": "Deduplicate source transaction IDs before publishing financial metrics.",
+        "severity": "warning",
+        "status": "open"
+      },
+      {
+        "affected_records": 1,
+        "affected_table": "sales_transactions",
+        "id": 4,
+        "issue_type": "Negative unit price in supplier file",
+        "related_metrics": [
+          "revenue",
+          "gross_margin"
+        ],
+        "remediation": "Quarantine the record and confirm the supplier import transformation.",
+        "severity": "critical",
+        "status": "open"
+      },
+      {
+        "affected_records": 9,
+        "affected_table": "products",
+        "id": 5,
+        "issue_type": "Missing category mapping",
+        "related_metrics": [
+          "category_performance_index"
+        ],
+        "remediation": "Complete product taxonomy mapping before category performance review.",
+        "severity": "warning",
+        "status": "open"
+      }
+    ],
+    "overall_score": 59,
+    "sources": [
+      {
+        "freshness_hours": 0.2,
+        "id": 1,
+        "last_synced_at": "2026-07-07T09:48:00",
+        "name": "Retail warehouse",
+        "source_type": "PostgreSQL",
+        "status": "healthy"
+      },
+      {
+        "freshness_hours": 14.0,
+        "id": 2,
+        "last_synced_at": "2026-07-06T20:00:00",
+        "name": "Inventory snapshots",
+        "source_type": "CSV / warehouse",
+        "status": "delayed"
+      },
+      {
+        "freshness_hours": 0.15,
+        "id": 3,
+        "last_synced_at": "2026-07-07T09:51:00",
+        "name": "Sales POS feed",
+        "source_type": "ERP connector",
+        "status": "healthy"
+      },
+      {
+        "freshness_hours": 17.0,
+        "id": 4,
+        "last_synced_at": "2026-07-06T17:00:00",
+        "name": "Supplier PO feed",
+        "source_type": "ERP connector",
+        "status": "failing"
+      },
+      {
+        "freshness_hours": 0.0,
+        "id": 5,
+        "last_synced_at": "2026-07-07T10:00:00",
+        "name": "Shopify storefront",
+        "source_type": "Shopify demo connector",
+        "status": "demo_connected"
+      }
+    ],
+    "trend": [
+      {
+        "day": "2026-06-24",
+        "score": 60
+      },
+      {
+        "day": "2026-06-25",
+        "score": 61
+      },
+      {
+        "day": "2026-06-26",
+        "score": 58
+      },
+      {
+        "day": "2026-06-27",
+        "score": 59
+      },
+      {
+        "day": "2026-06-28",
+        "score": 60
+      },
+      {
+        "day": "2026-06-29",
+        "score": 61
+      },
+      {
+        "day": "2026-06-30",
+        "score": 58
+      },
+      {
+        "day": "2026-07-01",
+        "score": 59
+      },
+      {
+        "day": "2026-07-02",
+        "score": 60
+      },
+      {
+        "day": "2026-07-03",
+        "score": 61
+      },
+      {
+        "day": "2026-07-04",
+        "score": 58
+      },
+      {
+        "day": "2026-07-05",
+        "score": 59
+      },
+      {
+        "day": "2026-07-06",
+        "score": 60
+      },
+      {
+        "day": "2026-07-07",
+        "score": 61
+      }
+    ]
+  },
+  "question_trace": {
+    "answer": "18 branch-SKU combinations are below their reorder policy. The most urgent exposure is concentrated in Islamabad and Lahore; validate open supplier POs before submitting a replenishment action for approval.",
+    "confidence": 0.78,
+    "evidence": {
+      "data_quality_notices": [
+        {
+          "affected_records": 320,
+          "affected_table": "inventory_records",
+          "id": 1,
+          "issue_type": "Inventory snapshot delayed by 14 hours",
+          "related_metrics": [
+            "stock_cover",
+            "stockout_risk"
+          ],
+          "remediation": "Refresh the inventory snapshot before approving replenishment action.",
+          "severity": "high",
+          "status": "open"
+        },
+        {
+          "affected_records": 16,
+          "affected_table": "products",
+          "id": 2,
+          "issue_type": "Supplier mapping missing for 16 products",
+          "related_metrics": [
+            "supplier_lead_time",
+            "stockout_risk"
+          ],
+          "remediation": "Map supplier references, re-run validation, and review affected stockout recommendations.",
+          "severity": "critical",
+          "status": "open"
+        },
+        {
+          "affected_records": 9,
+          "affected_table": "products",
+          "id": 5,
+          "issue_type": "Missing category mapping",
+          "related_metrics": [
+            "category_performance_index"
+          ],
+          "remediation": "Complete product taxonomy mapping before category performance review.",
+          "severity": "warning",
+          "status": "open"
+        }
+      ],
+      "execution_mode": "deterministic_governed_template",
+      "rows": [
+        {
+          "available": 0,
+          "branch": "Islamabad Branch",
+          "days_cover": 1,
+          "product": "Baby Care Essential 111",
+          "recommended_order": 108,
+          "reorder_point": 36,
+          "risk": "critical",
+          "sku": "NSR-1110",
+          "supplier": "NorthStar Imports",
+          "unit_cost": 5327.84
+        },
+        {
+          "available": 0,
+          "branch": "Lahore Branch",
+          "days_cover": 1,
+          "product": "Audio Core 265",
+          "recommended_order": 141,
+          "reorder_point": 47,
+          "risk": "critical",
+          "sku": "NSR-1264",
+          "supplier": "Crescent Trading",
+          "unit_cost": 2076.95
+        },
+        {
+          "available": 2,
+          "branch": "Islamabad Branch",
+          "days_cover": 1,
+          "product": "Health Core 37",
+          "recommended_order": 34,
+          "reorder_point": 12,
+          "risk": "critical",
+          "sku": "NSR-1036",
+          "supplier": "Orbit Wholesale",
+          "unit_cost": 6912.96
+        },
+        {
+          "available": 3,
+          "branch": "Islamabad Branch",
+          "days_cover": 1,
+          "product": "Office Supplies Plus 74",
+          "recommended_order": 72,
+          "reorder_point": 25,
+          "risk": "critical",
+          "sku": "NSR-1073",
+          "supplier": "Meridian Supply",
+          "unit_cost": 3360.51
+        },
+        {
+          "available": 3,
+          "branch": "Islamabad Branch",
+          "days_cover": 1,
+          "product": "Audio Core 185",
+          "recommended_order": 102,
+          "reorder_point": 35,
+          "risk": "critical",
+          "sku": "NSR-1184",
+          "supplier": "Crescent Trading",
+          "unit_cost": 2347.7
+        },
+        {
+          "available": 4,
+          "branch": "Lahore Branch",
+          "days_cover": 1.1,
+          "product": "Kitchenware Plus 106",
+          "recommended_order": 38,
+          "reorder_point": 14,
+          "risk": "high",
+          "sku": "NSR-1105",
+          "supplier": "Prime Route",
+          "unit_cost": 5116.74
+        },
+        {
+          "available": 4,
+          "branch": "Lahore Branch",
+          "days_cover": 1,
+          "product": "Stationery Essential 159",
+          "recommended_order": 47,
+          "reorder_point": 17,
+          "risk": "high",
+          "sku": "NSR-1158",
+          "supplier": "Harbor Goods",
+          "unit_cost": 3578.26
+        },
+        {
+          "available": 6,
+          "branch": "Lahore Branch",
+          "days_cover": 1,
+          "product": "Fashion Plus 318",
+          "recommended_order": 93,
+          "reorder_point": 33,
+          "risk": "critical",
+          "sku": "NSR-1317",
+          "supplier": "Lumen Partners",
+          "unit_cost": 744.02
+        },
+        {
+          "available": 7,
+          "branch": "Islamabad Branch",
+          "days_cover": 1,
+          "product": "Stationery Essential 259",
+          "recommended_order": 137,
+          "reorder_point": 48,
+          "risk": "critical",
+          "sku": "NSR-1258",
+          "supplier": "Harbor Goods",
+          "unit_cost": 7524.92
+        },
+        {
+          "available": 7,
+          "branch": "Islamabad Branch",
+          "days_cover": 1.3,
+          "product": "Automotive Pro 296",
+          "recommended_order": 59,
+          "reorder_point": 22,
+          "risk": "high",
+          "sku": "NSR-1295",
+          "supplier": "Prime Route",
+          "unit_cost": 4823.12
+        },
+        {
+          "available": 8,
+          "branch": "Lahore Branch",
+          "days_cover": 1,
+          "product": "Home Decor Core 53",
+          "recommended_order": 121,
+          "reorder_point": 43,
+          "risk": "critical",
+          "sku": "NSR-1052",
+          "supplier": "Atlas Consumer",
+          "unit_cost": 6041.74
+        },
+        {
+          "available": 8,
+          "branch": "Islamabad Branch",
+          "days_cover": 1,
+          "product": "Beverages Pro 148",
+          "recommended_order": 91,
+          "reorder_point": 33,
+          "risk": "high",
+          "sku": "NSR-1147",
+          "supplier": "Lumen Partners",
+          "unit_cost": 4377.81
+        },
+        {
+          "available": 8,
+          "branch": "Lahore Branch",
+          "days_cover": 1,
+          "product": "Pet Supplies Pro 212",
+          "recommended_order": 130,
+          "reorder_point": 46,
+          "risk": "critical",
+          "sku": "NSR-1211",
+          "supplier": "Vertex Distribution",
+          "unit_cost": 2563.78
+        },
+        {
+          "available": 10,
+          "branch": "Islamabad Branch",
+          "days_cover": 1,
+          "product": "Home Appliances Plus 222",
+          "recommended_order": 122,
+          "reorder_point": 44,
+          "risk": "high",
+          "sku": "NSR-1221",
+          "supplier": "Vertex Distribution",
+          "unit_cost": 3769.77
+        },
+        {
+          "available": 16,
+          "branch": "Faisalabad Branch",
+          "days_cover": 4.0,
+          "product": "Cleaning Plus 310",
+          "recommended_order": 32,
+          "reorder_point": 16,
+          "risk": "high",
+          "sku": "NSR-1309",
+          "supplier": "BluePeak Logistics",
+          "unit_cost": 2491.8
+        },
+        {
+          "available": 18,
+          "branch": "Rawalpindi Branch",
+          "days_cover": 4.0,
+          "product": "Home Appliances Plus 22",
+          "recommended_order": 36,
+          "reorder_point": 18,
+          "risk": "high",
+          "sku": "NSR-1021",
+          "supplier": "Vertex Distribution",
+          "unit_cost": 8233.07
+        },
+        {
+          "available": 22,
+          "branch": "Faisalabad Branch",
+          "days_cover": 4.0,
+          "product": "Automotive Pro 296",
+          "recommended_order": 44,
+          "reorder_point": 22,
+          "risk": "high",
+          "sku": "NSR-1295",
+          "supplier": "Prime Route",
+          "unit_cost": 4823.12
+        },
+        {
+          "available": 27,
+          "branch": "Lahore Branch",
+          "days_cover": 4.0,
+          "product": "Baby Care Essential 271",
+          "recommended_order": 54,
+          "reorder_point": 27,
+          "risk": "high",
+          "sku": "NSR-1270",
+          "supplier": "NorthStar Imports",
+          "unit_cost": 8849.65
+        }
+      ],
+      "sources": [
+        "branches",
+        "inventory_records",
+        "products"
+      ],
+      "synthetic": true
+    },
+    "execution_id": 1,
+    "query_plan": {
+      "aggregation": "ranked detail",
+      "allowed_tables": [
+        "inventory_records",
+        "products",
+        "branches",
+        "suppliers"
+      ],
+      "confidence": 0.91,
+      "date_range": {
+        "relative": "last_30_days"
+      },
+      "dimensions": [
+        "sku",
+        "branch",
+        "supplier"
+      ],
+      "explanation_strategy": "grounded_evidence_summary",
+      "filters": {
+        "organization_id": 1
+      },
+      "intent": "stockout_risk",
+      "metrics": [
+        "Stock cover days",
+        "Stockout risk"
+      ],
+      "ranking": "available_units ascending",
+      "requires_followup": false,
+      "row_limit": 24
+    },
+    "sql": "SELECT p.sku, p.name, b.name AS branch, i.available_units, p.reorder_point FROM inventory_records i JOIN products p ON p.id = i.product_id JOIN branches b ON b.id = i.branch_id WHERE i.organization_id = :organization_id AND i.available_units <= p.reorder_point ORDER BY i.available_units ASC LIMIT 24",
+    "status": "completed",
+    "trace": [
+      {
+        "detail": "Classified against approved operations intents.",
+        "state": "complete",
+        "step": "Understanding question"
+      },
+      {
+        "detail": "Stock cover days, Stockout risk",
+        "state": "complete",
+        "step": "Selecting approved metrics"
+      },
+      {
+        "detail": "Tenant-bound semantic query plan created.",
+        "state": "complete",
+        "step": "Preparing governed query plan"
+      },
+      {
+        "detail": "AST validation passed: read-only statement, approved relations, bounded result set.",
+        "state": "complete",
+        "step": "AST validation"
+      },
+      {
+        "detail": "Retrieved 18 governed evidence set(s) with a 5000ms execution budget.",
+        "state": "complete",
+        "step": "Retrieving evidence"
+      },
+      {
+        "detail": "Narrative is constrained to certified metric results and evidence.",
+        "state": "complete",
+        "step": "Generating grounded answer"
+      }
+    ],
+    "validation": {
+      "complexity_score": 4,
+      "parser": "sqlglot",
+      "reasons": [
+        "AST validation passed: read-only statement, approved relations, bounded result set."
+      ],
+      "row_limit": 24,
+      "tables": [
+        "branches",
+        "inventory_records",
+        "products"
+      ],
+      "valid": true
+    },
+    "warnings": [
+      "Synthetic demo data: review evidence and obtain human approval before operational action.",
+      "Data-quality warning: one or more source tables have active quality issues."
+    ]
+  },
+  "runtime": {
+    "execution_mode": "deterministic_governed_template",
+    "external_integration_called": false,
+    "forecast_method": "exponential_smoothing_baseline",
+    "learned_model": null,
+    "query_planner": "apps/api/app/services.py::question_plan",
+    "sql_guard": "apps/api/app/sql_guard.py::validate_sql"
+  },
+  "scenario": {
+    "id": 4,
+    "impact": {
+      "assurance": "Simulation only \u2014 no operational inventory, supplier, pricing, or ERP record is mutated.",
+      "baseline": {
+        "gross_margin": 28.96,
+        "inventory_value": 1485674073.65,
+        "revenue": 40164970.78,
+        "stockout_risk": 18.0
+      },
+      "projected": {
+        "gross_margin": 28.96,
+        "inventory_value": 1485674073.65,
+        "revenue": 40164970.78,
+        "stockout_risk": 16,
+        "supplier_exposure": 0.0
+      }
+    },
+    "name": "Synthetic transfer decision",
+    "simulated": true
+  },
+  "source": {
+    "path": "demo/animation_fixture.synthetic.json",
+    "runtime": "FastAPI TestClient + temporary SQLite database",
+    "sha256": "4e44c7a8a7d208578b14b1ceefeb7568d43157428d1446e3911b434d3f65f6ff",
+    "synthetic": true
+  },
+  "workspace": {
+    "kpi_count": 5,
+    "open_alert_count": 4
+  }
+}
