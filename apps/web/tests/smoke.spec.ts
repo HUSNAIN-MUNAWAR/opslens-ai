@@ -54,7 +54,9 @@ test('workspace switcher and global command palette expose tenant context', asyn
   await page.getByText('Crescent Commerce Co.').first().click();
   await expect(page.getByText('Workspace context changed to Crescent Commerce Co.')).toBeVisible();
   await page.keyboard.press(process.platform === 'darwin' ? 'Meta+K' : 'Control+K');
-  await expect(page.getByPlaceholder('Search products, suppliers, alerts, reports, or actions…')).toBeVisible();
+  const paletteSearch = page.getByPlaceholder('Search products, suppliers, alerts, reports, or actions…');
+  await expect(paletteSearch).toBeVisible();
+  await paletteSearch.fill('Data Quality Center');
   await page.locator('div.fixed a[href="/demo/data-quality"]').click({ force: true });
   await expect(page.getByRole('heading', { name: 'Data Quality Center', exact: true }).first()).toBeVisible();
 });
