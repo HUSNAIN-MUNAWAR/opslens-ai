@@ -6,23 +6,33 @@ import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const webRoot = path.resolve(here, '..');
-const output = path.resolve(here, '../../../screenshots');
+const output = path.resolve(here, '../../../assets/screenshots');
 const base = process.env.SCREENSHOT_BASE_URL || 'http://127.0.0.1:3000';
 const pages = [
-  ['landing', '/'],
-  ['executive-overview', '/demo'],
-  ['ai-copilot-v2', '/demo/copilot'],
-  ['data-quality-center', '/demo/data-quality'],
-  ['alerts-watchlists', '/demo/alerts'],
-  ['forecast-studio', '/demo/forecast'],
-  ['anomaly-explorer', '/demo/anomalies'],
-  ['decision-workbench', '/demo/workbench'],
-  ['investigation-detail', '/demo/investigations'],
-  ['data-ingestion', '/demo/ingestion'],
-  ['metric-catalog', '/demo/metrics'],
-  ['reporting-center', '/demo/reports'],
-  ['security-center', '/demo/security'],
-  ['global-search', '/demo/search'],
+  { name: '01-landing-page', route: '/' },
+  { name: '02-executive-dashboard', route: '/demo' },
+  { name: '03-copilot-evidence', route: '/demo/copilot' },
+  { name: '04-sql-governance-drawer', route: '/demo/governance' },
+  { name: '05-data-quality-center', route: '/demo/data-quality' },
+  { name: '06-alerts-command-center', route: '/demo/alerts' },
+  { name: '07-watchlist-detail', route: '/demo/inventory' },
+  { name: '08-forecast-studio', route: '/demo/forecast' },
+  { name: '09-anomaly-explorer', route: '/demo/anomalies' },
+  { name: '10-decision-workbench', route: '/demo/workbench' },
+  { name: '11-scenario-comparison', route: '/demo/workbench', setup: async (page) => page.locator('input[type="range"]').fill('80') },
+  { name: '12-investigation-detail', route: '/demo/investigations' },
+  { name: '13-approval-workflow', route: '/demo/investigations', setup: async (page) => page.getByRole('button', { name: 'Request approval' }).click() },
+  { name: '14-ingestion-wizard', route: '/demo/ingestion' },
+  { name: '15-import-mapping', route: '/demo/ingestion', setup: async (page) => page.getByRole('button', { name: 'Preview validation failure' }).click() },
+  { name: '16-lineage-explorer', route: '/demo/ingestion', setup: async (page) => page.getByRole('button', { name: 'Resolve mappings' }).click() },
+  { name: '17-metric-catalog', route: '/demo/metrics' },
+  { name: '18-reporting-center', route: '/demo/reports' },
+  { name: '19-report-preview', route: '/demo/reports', setup: async (page) => page.getByRole('button', { name: 'Generate report' }).click() },
+  { name: '20-security-center', route: '/demo/security' },
+  { name: '21-operations-console', route: '/demo/operations' },
+  { name: '22-command-palette', route: '/demo', setup: async (page) => page.getByRole('button', { name: /Command palette/ }).click() },
+  { name: '23-mobile-dashboard', route: '/demo/mobile', mobile: true },
+  { name: '25-generated-report-preview', route: '/demo/reports', setup: async (page) => { await page.getByRole('button', { name: 'Generate report' }).click(); await page.getByRole('button', { name: 'Create schedule' }).click(); } },
 ];
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -44,39 +54,21 @@ if (!(await isReady())) {
   if (!(await isReady())) throw new Error(`Next.js did not become available at ${base}`);
 }
 
-async function serverRenderedDocument(route) {
-  const response = await fetch(`${base}${route}`);
-  if (!response.ok) throw new Error(`Could not retrieve ${route}: ${response.status}`);
-  let html = await response.text();
-  const cssHrefs = [...html.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"[^>]*>/g)].map((match) => match[1]);
-  const css = await Promise.all(cssHrefs.map(async (href) => `<style>${await fetch(new URL(href, base)).then((item) => item.text())}</style>`));
-  // Managed Chromium in this environment blocks all HTTP navigation. Rendering this
-  // server-rendered Next.js document with its actual generated CSS keeps the captures
-  // reproducible without replacing the product UI with an unrelated static mockup.
-  html = html.replace(/<link[^>]+rel="stylesheet"[^>]*>/g, css.join('\n'));
-  html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
-  html = html.replace(/<script\b[^>]*\/?>/g, '');
-  return html;
-}
-
 try {
   await mkdir(output, { recursive: true });
   const browser = await chromium.launch({
     executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || '/usr/bin/chromium',
     args: ['--no-sandbox'],
   });
-  for (const [name, route] of pages) {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
-    await page.setContent(await serverRenderedDocument(route), { waitUntil: 'domcontentloaded' });
-    await page.screenshot({ path: path.join(output, `${name}.png`), fullPage: true });
+  for (const spec of pages) {
+    const page = await browser.newPage({ viewport: { width: spec.mobile ? 390 : 1440, height: spec.mobile ? 844 : 900 }, deviceScaleFactor: 1 });
+    await page.goto(`${base}${spec.route}`, { waitUntil: 'networkidle' });
+    if (spec.setup) await spec.setup(page);
+    await page.screenshot({ path: path.join(output, `${spec.name}.png`), fullPage: true });
     await page.close();
   }
-  const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
-  await mobile.setContent(await serverRenderedDocument('/demo/mobile'), { waitUntil: 'domcontentloaded' });
-  await mobile.screenshot({ path: path.join(output, 'mobile-executive.png'), fullPage: true });
-  await mobile.close();
   await browser.close();
-  console.log(`Captured ${pages.length + 1} server-rendered Next.js application surfaces in ${output}`);
+  console.log(`Captured ${pages.length} live Next.js application surfaces in ${output}`);
 } finally {
   if (server?.pid) {
     if (process.platform !== 'win32') process.kill(-server.pid, 'SIGTERM');
