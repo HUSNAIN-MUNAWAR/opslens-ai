@@ -7,7 +7,7 @@ test('demo login landing and executive command center render', async ({ page }) 
   await expect(page.getByRole('heading', { name: 'Executive overview', exact: true }).first()).toBeVisible();
   await expect(page.getByText('Priorities for today', { exact: true }).first()).toBeVisible();
   await page.getByText('Open governed workflow').first().click();
-  await expect(page.getByText('Decision Workbench')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Decision Workbench', exact: true }).first()).toBeVisible();
 });
 
 test('copilot displays evidence then creates an attached report draft', async ({ page }) => {
@@ -15,8 +15,8 @@ test('copilot displays evidence then creates an attached report draft', async ({
   await expect(page.getByText('Validated SQL', { exact: true }).first()).toBeVisible();
   await expect(page.getByText('AST validation result', { exact: true }).first()).toBeVisible();
   await expect(page.getByText('Data-quality warning', { exact: true }).first()).toBeVisible();
-  await page.getByText('Create report').click();
-  await expect(page.getByText('Executive report draft created')).toBeVisible();
+  await page.getByRole('button', { name: 'Create report', exact: true }).first().click();
+  await expect(page.getByText('Executive report draft created', { exact: false }).first()).toBeVisible();
 });
 
 test('data-quality issue can be acknowledged and routed to investigation workflow', async ({ page }) => {
@@ -55,6 +55,6 @@ test('workspace switcher and global command palette expose tenant context', asyn
   await expect(page.getByText('Workspace context changed to Crescent Commerce Co.')).toBeVisible();
   await page.keyboard.press(process.platform === 'darwin' ? 'Meta+K' : 'Control+K');
   await expect(page.getByPlaceholder('Search products, suppliers, alerts, reports, or actions…')).toBeVisible();
-  await page.locator('a[href="/demo/data-quality"]').last().click({ force: true });
+  await page.locator('div.fixed a[href="/demo/data-quality"]').click({ force: true });
   await expect(page.getByRole('heading', { name: 'Data Quality Center', exact: true }).first()).toBeVisible();
 });
