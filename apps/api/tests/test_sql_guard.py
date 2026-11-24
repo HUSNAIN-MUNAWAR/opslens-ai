@@ -27,3 +27,12 @@ def test_blocks_dangerous_function_and_unapproved_table():
 def test_blocks_cross_tenant_template_without_bind_parameter_and_large_limit():
     assert not validate_sql("SELECT * FROM products LIMIT 10", require_tenant_scope=True).valid
     assert not validate_sql("SELECT * FROM products WHERE organization_id = :organization_id LIMIT 900", require_tenant_scope=True).valid
+
+
+def test_requires_tenant_predicate_for_every_joined_relation():
+    unsafe = "SELECT p.sku, b.name FROM products p JOIN branches b ON b.id = p.branch_id WHERE p.organization_id = :organization_id"
+    safe = unsafe.replace("WHERE p.organization_id", "WHERE b.organization_id = :organization_id AND p.organization_id")
+    report = validate_sql(unsafe, require_tenant_scope=True)
+    assert not report.valid
+    assert any("relation alias b" in reason for reason in report.reasons)
+    assert validate_sql(safe, require_tenant_scope=True).valid

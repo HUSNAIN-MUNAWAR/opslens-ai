@@ -72,6 +72,17 @@ def _fallback_tables(sql: str) -> list[str]:
     return [table for table in tables if table not in ctes]
 
 
+def _fallback_table_aliases(sql: str) -> list[tuple[str, str]]:
+    pairs: list[tuple[str, str]] = []
+    pattern = r"\b(?:from|join)\s+([a-zA-Z_][\w.]*)\s+(?:as\s+)?([a-zA-Z_][\w]*)"
+    for match in re.finditer(pattern, sql, flags=re.IGNORECASE):
+        table = match.group(1).strip('"').lower().split(".")[-1]
+        alias = match.group(2).lower()
+        if alias not in {"where", "join", "on", "group", "order", "limit", "left", "right", "inner", "outer"}:
+            pairs.append((table, alias))
+    return pairs
+
+
 def _fallback_validate(sql: str, *, require_tenant_scope: bool, max_rows: int) -> ValidationReport:
     source = sql.strip().rstrip(";")
     reasons: list[str] = []
@@ -94,6 +105,14 @@ def _fallback_validate(sql: str, *, require_tenant_scope: bool, max_rows: int) -
             reasons.append(f"Unapproved table requested: {table}.")
     if require_tenant_scope and tables and ":organization_id" not in lower and ":org_id" not in lower:
         reasons.append("Tenant scope bind parameter is required for governed execution.")
+    if require_tenant_scope and tables:
+        aliases = _fallback_table_aliases(source)
+        scoped_names = {alias for _, alias in aliases} | set(tables)
+        if len(tables) == 1 and re.search(r"\borganization_id\b", lower):
+            scoped_names = set()
+        for table, alias in aliases:
+            if not re.search(rf"\b{re.escape(alias)}\s*\.\s*organization_id\b", lower) and not re.search(rf"\b{re.escape(table)}\s*\.\s*organization_id\b", lower):
+                reasons.append(f"Tenant predicate is missing for relation alias {alias} ({table}).")
     joins = len(re.findall(r"\bjoin\b", lower))
     ctes = len(re.findall(r"\bas\s*\(", lower)) if lower.startswith("with ") else 0
     subqueries = max(0, lower.count("select") - 1)
@@ -157,12 +176,14 @@ def validate_sql(sql: str, *, require_tenant_scope: bool = False, max_rows: int 
 
     ctes = _cte_names(tree)
     table_names: list[str] = []
+    tenant_relations: list[tuple[str, str]] = []
     for table in tree.find_all(exp.Table):
         name = (table.name or "").lower()
         schema = (table.db or "").lower()
         if name in ctes:
             continue
         table_names.append(name)
+        tenant_relations.append((name, (table.alias_or_name or name).lower()))
         if schema not in ALLOWED_SCHEMAS:
             reasons.append(f"Unapproved schema requested: {schema}.")
         if name not in ALLOWED_TABLES:
@@ -205,6 +226,10 @@ def validate_sql(sql: str, *, require_tenant_scope: bool = False, max_rows: int 
         tenant_bind = (":organization_id" in raw_compact or ":org_id" in raw_compact or "%(organization_id)s" in compact or "%(org_id)s" in compact)
         if not tenant_bind:
             reasons.append("Tenant scope bind parameter is required for governed execution.")
+        elif len(tenant_relations) > 1:
+            for table, relation in tenant_relations:
+                if not re.search(rf"\b{re.escape(relation)}\s*\.\s*organization_id\b", compact) and not re.search(rf"\b{re.escape(table)}\s*\.\s*organization_id\b", compact):
+                    reasons.append(f"Tenant predicate is missing for relation alias {relation} ({table}).")
 
     hard_failures = [r for r in reasons if not r.startswith("Row limit was automatically")]
     if not hard_failures:
